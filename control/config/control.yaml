@@ -1,0 +1,97 @@
+/**:
+  ros__parameters:
+    # vehicle param
+    L: 1.198
+    Cr: -17685.3
+    Cf: -17685.3
+    # m: 100.0
+    # I: 80.0
+    m: 500.0
+    I: 336.7
+    lr: 0.6
+    lf: 0.6
+
+    #control alg type
+
+    control_alg_type: 0   #0: lqr; 1: mpc; 2: pure pursuit
+    flag_refer_line_follow_type: false #参考线跟踪模式（巡迹）
+    #prediction time
+    prediction_time: 0.2
+    # lat param
+    # max iteration
+    max_iter: 1000
+    eps_iter: 1.e-3
+
+    # angular velocity
+    max_w: 0.34
+    min_w: -0.34
+    max_w_delta: 0.34
+    # lookahead
+    lookahead_time: 1.0
+    min_lookahead_dist: 1.198
+    max_lookahead_dist: 4.0
+    model_compensate: 2.5
+    max_kappa: 0.4
+    max_diff_kappa: 0.1
+    max_diff_phi: 0.1
+    max_dist_between_two_points: 0.1
+    ki_lat: 0.01
+    ki_phi: 0.005
+    kd_lat: 0.0001
+    kd_phi: 0.0001
+
+    #MPC param Hp,Prediction horizon;Hu,Control horizon
+    Hp: 3
+    Hu: 1
+
+    # 效果比较好的一版参数
+    # Q_matrix_kinematics: [0.72, 0.22]
+    # R_matrix_kinematics_lat: [10.88]
+
+    Q_matrix_kinematics: [0.72, 0.22]
+    R_matrix_kinematics_lat: [10.88]
+
+    Q_matrix_dynamical: [10.0, 1.5, 10.0, 1.5]
+    R_matrix_dynamical_lat: [100.0]
+
+    Q_matrix_kinematics_mpc: [0.05, 0.06]
+    R_matrix_kinematics_lat_mpc: [6.5]
+    Q_matrix_dynamical_mpc: [0.5, 0.5, 0.5, 0.5]
+    R_matrix_dynamical_lat_mpc: [10.0]
+
+
+    # lon torque_rpm_mode 0-扭矩模式，1-速度模式
+    torque_rpm_mode : 1
+
+    # linear velocity
+    max_v: 2.0
+    max_v_back: -0.3
+    min_v: 0.05
+    max_v_delta: 0.05
+    # lon speed pid param
+    kp_lon: 0.5
+    ki_lon: 0.0
+    kd_lon: 0.0
+
+    # lon brk_press param
+    k_pressure: 100.0
+    kp_press: 10.0
+
+    #扭矩控制模式下，位置pid的参数
+    k_torque: 4.5
+    kp_t_p: 1.0
+    ki_t_p: 0.1
+    kd_t_p: 0.1
+    #扭矩控制模式下，速度pid的参数
+    kp_t_s: 5.0
+    ki_t_s: 0.1
+    kd_t_s: 0.1
+    k_slope_compensate: 0.028
+    slope_mode: false
+    is_use_adaptive_pid: false
+
+    #停车速度增益
+    k_stop_speed: 0.4
+    acc_stop: 0.3
+    k_stop_speed_slow: 0.8
+    acc_stop_slow: 0.1

@@ -1,0 +1,6 @@
+<launch>
+  <group>
+    <node pkg="plan" exec="plan_test_node" name="plan_test_node" output="screen" emulate_tty="true">      
+    </node>
+  </group>
+</launch>

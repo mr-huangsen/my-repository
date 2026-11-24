@@ -1,0 +1,17 @@
+int32 clear_path            #是否需要清空轨迹，0-不清空，1-清空，急停， 2-清空，缓停。默认不清空
+int32 is_stop_turn_wheel    #脱困是否需要停下，打好前轮打角再走，0-不停，1-停下
+int32 path_type             #路径类型 0-规划、行车，1-脱困泊车、后退，2-脱困泊车、前进。默认为 0 
+int32 vaild_path_index      #最后一个有效路径的序号点
+uint64[] timestamp          #时间戳
+float64[] x                 #x坐标
+float64[] y                 #y坐标
+float64[] phi               #横摆角
+float64[] v                 #速度
+float64[] a                 #加速度
+float64[] kappa             #路径曲率
+float64[] accumulated_s     #累计里程
+
+
+
+---
+int32 res                   #返回接收结果 1-接收成功 0-接收失败

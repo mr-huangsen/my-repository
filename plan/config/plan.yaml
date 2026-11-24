@@ -1,0 +1,35 @@
+plan_type: 1
+#lattic
+sample_type: 0            #采样类型 0-空间采样,1-时间采样
+MAX_SPEED: 12.5           #; // 采样路径的最大速度 
+MAX_SPEED_LAT: 100.0      #; // 采样路径的最大横向角速度 
+MAX_ACCEL: 10.0           #;  // 采样路径的最大加速度 
+MAX_CURVATURE: 4.0        #;  // 采样路径的最大曲率 
+MAX_ROAD_WIDTH: 5.0       #;  // 采样路径的横向宽度 
+D_ROAD_W: 1.0             #;  // 采样路径的横向宽度间隔 
+DT: 0.1                   #;  // 采样路径的路径点之间的时间间隔 
+MAXT: 8.0                #;  // 采样路径的最大采样时间 
+MINT: 2.0                 #;  // 采样路径的最小采样时间 
+DTIME: 1.0               #    采样时间的时间间隔
+TARGET_SPEED: 1.5         #;  // 采样的路径的目标速度 
+D_T_S: 0.3                #;  // 采样的路径的速度间隔 
+SMALL_SPEED: 0.3          #;  采样的路径的最小速度
+DS: 5                     #;  // 采样的路径的纵向路径间隔 
+MAXS: 15.0                #;  // 采样的路径的最大纵向长度  
+MINS: 5.0                 #;  // 采样的路径的最小纵向长度 
+# cost weights
+KJ: 0.1                   #;横向最大加加速度权重
+KT: 0.1                   #;采样时间权重
+KJD: 200.0                  #;横向位置权重
+KD: 30.0                  #;终点权重
+KLAT: 1.0                 #;横向权重总权重
+KLON: 1.0                 #;纵向权重总权重
+KCAC: 0.0                 #;向心加速度权重
+KEFF: 2.0                 #;效率权重（纵向加速度极值权重）
+
+#控制周期 
+control_cycle: 0.02
+#refer_line
+sample_point_number: 150
+distance_forward: 20.0
+distance_back: 10.0

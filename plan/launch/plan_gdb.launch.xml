@@ -1,0 +1,9 @@
+<launch>
+  <group>
+    <node pkg="plan" exec="plan_node" name="plan" output="screen"
+          launch-prefix="gdb -ex run --args" emulate_tty="true">
+      <param from="$(find-pkg-share plan)/config/ilqr.yaml"/>
+      <param from="$(find-pkg-share plan)/config/plan.yaml"/>
+    </node>
+  </group>
+</launch>

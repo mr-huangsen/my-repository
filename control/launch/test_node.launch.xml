@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="control" exec="test_node" name="test_node" output="screen">
+  </node>
+</launch>

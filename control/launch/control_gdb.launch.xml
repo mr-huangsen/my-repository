@@ -1,0 +1,9 @@
+<launch>
+  <group>
+    <node pkg="control" exec="control_node" name="control_node" output="screen"
+          launch-prefix="gdb -ex run --args" emulate_tty="true">
+      <param from="$(find-pkg-share control)/config/compensation.yaml"/>
+      <param from="$(find-pkg-share control)/config/control.yaml"/>
+    </node>
+  </group>
+</launch>
