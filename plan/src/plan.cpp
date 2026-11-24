@@ -19,9 +19,9 @@ geometry_msgs::msg::Quaternion createQuaternionMsgFromYaw(double yaw)
 Plan::Plan(rclcpp::Node::SharedPtr nh):nh(nh)
 {    
     run_timer = nh->create_wall_timer(std::chrono::duration<double>(DataPool::getInstance()->run_dt), std::bind(&Plan::timerCallback, this));
-    favoritism_path_pub = nh->create_publisher<igv_msgs::msg::LocalTrajectory>("/favoritism_path",5);
+    trajectory_path_pub = nh->create_publisher<igv_msgs::msg::LocalTrajectory>("/trajectory_path",5);
     start_point_pub = nh->create_publisher<geometry_msgs::msg::PoseStamped>("/plan_start_point",5);
-    path_pub_ptr = nh->create_publisher<nav_msgs::msg::Path>("/visualized_favoritism_path",5);
+    path_pub_ptr = nh->create_publisher<nav_msgs::msg::Path>("/visualized_trajectory_path",5);
     smooth_path_ptr = nh->create_publisher<nav_msgs::msg::Path>("/smooth_path",5);
 }
 void Plan::run()
@@ -59,8 +59,8 @@ void Plan::run()
     }
     if(is_arrive(m_current_position,m_ref_line))
     {
-        favoritism_path.flag_stop = 2;
-        favoritism_path.waypoint.clear();
+        trajectory_path.flag_stop = 2;
+        trajectory_path.waypoint.clear();
         return ;
     }
     //获取靠近当前的路径点前20米、后10米的中心线及道路边界
@@ -147,7 +147,7 @@ void Plan::run()
             toll_trajectory[i].a);
     }
     //
-    LocalTrajectoryToTestPath(toll_trajectory,favoritism_path);
+    LocalTrajectoryToTestPath(toll_trajectory,trajectory_path);
     last_local_trajectory = toll_trajectory;
     DataPool::getInstance()->flag_is_new_task = false;    
 }
@@ -193,23 +193,23 @@ void Plan::timerCallback()
     temp_point.pose.position.y = start_plan_point.y;
     temp_point.pose.orientation = createQuaternionMsgFromYaw(start_plan_point.yaw);
     start_point_pub->publish(temp_point);
-    favoritism_path_pub->publish(favoritism_path);
+    trajectory_path_pub->publish(trajectory_path);
     pub_path(toll_trajectory,path_pub_ptr);
     if(!smooth_path.empty())
         pub_path(smooth_path, smooth_path_ptr);
     
  }
-void Plan::LocalTrajectoryToTestPath(LocalTrajectory trajectory, Favoritism &favoritism_path)
+void Plan::LocalTrajectoryToTestPath(LocalTrajectory trajectory, Trajectory &trajectory_path)
 {
     if(trajectory.empty())
     {
-        favoritism_path.waypoint.clear();
-        favoritism_path.flag_stop = 2;
+        trajectory_path.waypoint.clear();
+        trajectory_path.flag_stop = 2;
     }
     else
     {
-        favoritism_path.waypoint.clear();
-        favoritism_path.flag_stop = 0;
+        trajectory_path.waypoint.clear();
+        trajectory_path.flag_stop = 0;
         igv_msgs::msg::Position temp_point;
         for(int i = 0; i < trajectory.size(); i++)
         {
@@ -220,7 +220,7 @@ void Plan::LocalTrajectoryToTestPath(LocalTrajectory trajectory, Favoritism &fav
             temp_point.v = trajectory[i].v;
             temp_point.a = trajectory[i].a;
             temp_point.kappa = trajectory[i].cur;
-            favoritism_path.waypoint.emplace_back(temp_point);          
+            trajectory_path.waypoint.emplace_back(temp_point);          
         }
         
     }

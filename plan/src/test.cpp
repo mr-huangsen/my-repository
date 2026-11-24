@@ -25,7 +25,7 @@ geometry_msgs::msg::Quaternion createQuaternionMsgFromYaw(double yaw)
     return msg;
 }
 
-void receive_favoritism_path(const igv_msgs::msg::LocalTrajectory::SharedPtr msg)
+void receive_trajectory_path(const igv_msgs::msg::LocalTrajectory::SharedPtr msg)
 {
     local_trajectory = *msg;
     LOG_INFO("NEW PATH!!!");
@@ -68,7 +68,7 @@ int main(int argc, char **argv)
     auto left_bound_pub = nh->create_publisher<nav_msgs::msg::Path>("/planning_component/left_bound", 10);
     auto right_bound_pub = nh->create_publisher<nav_msgs::msg::Path>("/planning_component/right_bound", 10);
     auto location_pub = nh->create_publisher<igv_msgs::msg::Location>("/localization", 10);
-    auto favoritism_path_sub = nh->create_subscription<igv_msgs::msg::LocalTrajectory>("/favoritism_path", 10, &receive_favoritism_path);
+    auto trajectory_path_sub = nh->create_subscription<igv_msgs::msg::LocalTrajectory>("/trajectory_path", 10, &receive_trajectory_path);
     nav_msgs::msg::Odometry temp_odom;
     temp_odom.twist.twist.linear.x = 0.0;
     temp_odom.twist.twist.angular.z = 0.0;   

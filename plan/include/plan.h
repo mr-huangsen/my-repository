@@ -16,7 +16,7 @@ class Plan{
 private:
     rclcpp::Node::SharedPtr nh;
     rclcpp::TimerBase::SharedPtr run_timer;
-    rclcpp::Publisher<igv_msgs::msg::LocalTrajectory>::SharedPtr favoritism_path_pub;
+    rclcpp::Publisher<igv_msgs::msg::LocalTrajectory>::SharedPtr trajectory_path_pub;
     rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr start_point_pub;
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub_ptr, smooth_path_ptr;
 
@@ -25,7 +25,7 @@ private:
     int last_ref_line_match_point_index, last_left_bound_match_point_index, last_right_bound_match_point_index;
     
     LocalTrajectory last_local_trajectory, stitch_trajectory, plan_result, toll_trajectory, smooth_path;
-    Favoritism favoritism_path;
+    Trajectory trajectory_path;
     int point_number = 150;
     Position start_plan_point;
     std::shared_ptr<PathSmoother> path_smoother_ptr = std::make_shared<PathSmoother>(150);
@@ -40,7 +40,7 @@ public:
 
     bool is_arrive(FrenetPathPoint m_current_position, LocalTrajectory m_ref_line);
 
-    void LocalTrajectoryToTestPath(LocalTrajectory trajectory, Favoritism &favoritism_path);
+    void LocalTrajectoryToTestPath(LocalTrajectory trajectory, Trajectory &trajectory_path);
 
     void pub_path(const LocalTrajectory path, rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pub);
     

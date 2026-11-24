@@ -23,7 +23,7 @@
 #include "igv_msgs/msg/position.hpp"
 #include "ilqr/ilqr_config.h"
 typedef igv_msgs::msg::Location Location;
-typedef igv_msgs::msg::LocalTrajectory Favoritism;
+typedef igv_msgs::msg::LocalTrajectory Trajectory;
 
 struct PredictionStatus
 {
